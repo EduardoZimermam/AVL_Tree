@@ -1,6 +1,5 @@
 #include <stdio.h>
-
-
+#include <stdlib.h>
 
 truct tNo{
 	char chave;
@@ -17,7 +16,6 @@ void criaNo (char chave){				// para qualquer árvore binaria de char
 	no -> dir = NULL;
  return(no);	
 }
-
 
 
 tNo *busca (tNo *no, int c){
