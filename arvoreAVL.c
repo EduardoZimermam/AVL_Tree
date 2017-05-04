@@ -26,5 +26,9 @@ tNo *busca (tNo *no, int c){
 void imprime_tree(tNo *raiz){
 	if (raiz == NULL)
 		printf("()");
-	
+	else
+												/*Definir uma impressão por nodo, criando uma nova função que imprime nodo por nodo da árvore, criando uma pilha para abertura de cada
+													parênteses e seu fechamento, assim controlamos para que não falte nenhum parenteses, para as vírgulas precisamos definir um padrão
+													para que elas também fiquem corretas.*/
+
 }

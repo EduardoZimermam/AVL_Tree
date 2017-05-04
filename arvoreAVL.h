@@ -9,6 +9,7 @@ typedef struct tno_s{
 
 tNo *criaNo (char);
 tNo *busca (tNo*, int);
+void imprime_tree(tNo *);			/*Protótipos das funções para construção da biblioteca. */
 
 
 
