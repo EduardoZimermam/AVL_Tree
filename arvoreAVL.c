@@ -16,9 +16,9 @@ tNo *busca (tNo *no, int c){
 	if (no == NULL)
 		return NULL;
 	if(c == no->chave)
-	  return (no) ;								/*Definição de uma função para buscar um determinado nodo na árvore. O seu retorno depende se o nodo foi encontrado ou não*/
-	if (c < no->chave);
+	  return (no);								/*Definição de uma função para buscar um determinado nodo na árvore. O seu retorno depende se o nodo foi encontrado ou não*/
+	if (c < no->chave)
 		return (busca(no->esq, c));
-	else 
+	else
 		return (busca(no->dir, c));
 }

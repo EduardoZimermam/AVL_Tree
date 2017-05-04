@@ -8,7 +8,7 @@ typedef struct tno_s{
 }tNo;
 
 tNo *criaNo (char);
-tNo *busca (tNo, int);
+tNo *busca (tNo*, int);
 
 
 
