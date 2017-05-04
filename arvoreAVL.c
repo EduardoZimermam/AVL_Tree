@@ -22,3 +22,9 @@ tNo *busca (tNo *no, int c){
 	else
 		return (busca(no->dir, c));
 }
+
+void imprime_tree(tNo *raiz){
+	if (raiz == NULL)
+		printf("()");
+	
+}
