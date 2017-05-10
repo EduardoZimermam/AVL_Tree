@@ -12,6 +12,56 @@ tNo *cria_no (char chave){
 }
 
 
+
+int altura(){   						/*Função para encontrar a altura da árvore*/
+	if (no == NULL)
+		return (-1);
+	else
+		return (no-> altura);
+}
+
+/*int balanceamento(){
+
+}*/
+
+
+int maior(int x, int y){
+	if(x > y)
+		return (x);
+	else
+		return (y);
+}
+
+
+
+void rotacaoEE (tNo *raiz){
+ struct tNo *no;
+
+ 	no = (*raiz)-> esq;
+ 	no-> dir = *raiz;
+ 	(*raiz)-> altura = maior (altura_tNo((*raiz)-> esq), altura_tNo((*raiz)-> dir)) + 1;
+
+ 	no-> altura = maior(altura_tNo (no-> esq), (*raiz)-> altura)+1;
+
+ 	(*raiz) = no;
+}
+
+
+
+void rotacaoDD(tNo *raiz){
+ struct tNo *no;
+
+ 	no = (*raiz)-> dir;
+ 	no-> dir = no-> esq;
+ 	no-> esq = (*raiz);
+ 	(*raiz)-> altura = maior (altura_tNo((*raiz)-> esq), altura_tNo((*raiz)-> dir)) + 1;
+
+ 	no-> altura = maior(altura_tNo(no-> dir), (*raiz)-> altura)+ 1;
+
+ 	(*raiz) = no;
+}
+
+
 tNo *busca (tNo *no, int c){
 	if (no == NULL)
 		return NULL;
@@ -32,3 +82,4 @@ void imprime_tree(tNo *raiz){
 													para que elas também fiquem corretas.*/
 
 }
+
