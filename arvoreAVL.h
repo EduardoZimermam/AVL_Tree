@@ -2,15 +2,22 @@
 #define __AVL__
 
 typedef struct tno_s{
-	char chave;						/*Estrutura do nodo de uma árvore AVL básica. */
+	int chave;
+	int altura;						/*Estrutura do nodo de uma árvore AVL básica. */
 	struct tno_s *esq;
 	struct tno_s *dir;
 }tNo;
 
-tNo *criaNo (char);
-tNo *busca (tNo*, int);
-void imprime_tree(tNo *);			/*Protótipos das funções para construção da biblioteca. */
 
-
+/*Protótipos das funções para construção da biblioteca. */
+tNo *cria_no (int valor);
+int altura_no(tNo *no);
+int balanceamento(tNo *no);
+int maior(int x, int y);
+tNo *rotacaoEsqEsq (tNo *raiz);
+tNo *rotacaoDirDir(tNo *raiz);
+tNo *insere(tNo *no,int valor);
+tNo *busca (tNo*, int c);
+void imprime_tree(tNo *no);			
 
 #endif
