@@ -2,65 +2,155 @@
 #include <stdlib.h>
 #include "arvoreAVL.h"
 
-tNo *cria_no (char chave){				
-	tNo *no;
-	no = malloc (sizeof(tNo));			/*Definição de uma função para criar o nodo da árvore*/
-	no->chave = chave;
+tNo *cria_no (int valor){				
+ tNo *no;
+	no = (tNo*) malloc (sizeof(tNo));			/*Definição de uma função para criar o nodo da árvore*/
+	no->chave = valor;
+	no->altura = 1;
 	no->esq = NULL;
 	no->dir = NULL;
+
  return(no);	
 }
 
 
-
-int altura(){   						/*Função para encontrar a altura da árvore*/
-	if (no == NULL)
-		return (-1);
-	else
+int altura_no(tNo *no){   						/*Função para encontrar a altura da árvore*/
+	if (no == NULL){
+		return (0);                   
+	}
+	else{
 		return (no-> altura);
+	}
 }
 
-/*int balanceamento(){
 
-}*/
+int balanceamento(tNo *no){                           /*Diferença nas alturas das sub-árvores*/
+ int total;
+ 	if(no == NULL){
+ 		total = 0;
+ 	}
+ 	else{
+ 		total= labs(altura_no (no->esq) - altura_no (no->dir));          /*Função labs retorna o valor real,podendo ser um valor negativo*/
+ 	}
+	
+ return(total);
+}
 
 
-int maior(int x, int y){
-	if(x > y)
+int maior(int x, int y){             /*Função que determina o maior*/
+	if(x > y){
 		return (x);
-	else
+	}
+	else{
 		return (y);
+	}
+}
+
+
+/*As rotações são aplicadas no ancestral do nó inserido cujo o valor de balanceamento passa a ser +2 ou -2*/
+tNo *rotacaoEsqEsq (tNo *raiz){            /*Rotação Simples à Esquerda - quanto há dois nós para a direita*/
+ tNo *no;
+
+ 	no = raiz-> dir;
+ 	no->esq = raiz;							  
+ 	raiz-> dir = no-> esq;					//filho direito passa a ser filho esquerdo da raiz
+
+ 	raiz->altura = maior (altura_no(raiz-> esq), altura_no(raiz-> dir)) + 1;
+	no->altura = maior (altura_no(no-> esq),altura_no (no->dir))+1;
+
+ return(no);
+}
+
+
+tNo *rotacaoDirDir(tNo *raiz){           /*Rotação Simples à Direita - quanto há dois nós para a esquerda*/
+ tNo *no;
+
+ 	no = raiz->esq;
+    no->dir = raiz;
+	raiz->esq = no->dir;
+
+ 	raiz->altura = maior (altura_no(raiz->esq), altura_no(raiz->dir)) + 1;
+	no->altura = maior(altura_no(no-> esq), altura_no (no->dir))+ 1;
+
+ return(no);
+}
+
+
+tNo *insere(tNo *no,int valor){
+
+	int b;
+
+	if(no == NULL){
+		return (cria_no(valor));
+	}
+
+	if(valor < no->chave){
+		no->esq = insere(no->esq,valor);
+	}
+	else if (valor > no->chave){
+		no->dir = insere(no->dir,valor);
+	}
+	else{
+		return(no);
+	}
+
+	no->altura = 1+ maior(altura_no(no->esq),altura_no(no->dir));  /*atualiza a altura do nodo*/
+
+	b = balanceamento(no);     /*verifica se esta balanceado ou nao*/
+
+
+	/*Se o nó ficar desbalanceado,existem 4 casos*/
+
+	//Caso Esqueda Esquerda
+	if (b > 1 && valor < no->esq->chave){
+		return rotacaoDirDir(no);
+	}
+
+	//Caso Direita Direita
+	if (b < -1 && valor > no->dir->chave)
+        return rotacaoEsqEsq(no);
+ 
+    //Caso Esquerda Direita
+    if (b > 1 && valor > no->esq->chave){
+        no->esq =  rotacaoEsqEsq(no->esq);
+        return rotacaoDirDir(no);
+    }
+ 
+    //Caso Direita Esquerda
+    if (b < -1 && valor < no->dir->chave)
+    {
+        no->dir = rotacaoDirDir(no->dir);
+        return rotacaoEsqEsq(no);
+    }
+ 
+   return (no);
 }
 
 
 
-void rotacaoEE (tNo *raiz){
- struct tNo *no;
+/*int remove(){
+ 
+	if((*raiz)== NULL){
+		printf("Valor não existe!\n");
+		return(0);
+	}
+	if(valor <(*raiz)->chave){
+		if( = remove(&(*raiz)->esq,valor)){
+			if(balanceamento(*raiz)>=2){
+				if(altura_no((*raiz)->dir->esq) <= altura_no((*raiz)->dir->dir)){
+					rotacaoDirDir(raiz);
+				}
+				else{
+					rotacaoDirEsq(raiz);
+				}
+			}
+		}
+	}
 
- 	no = (*raiz)-> esq;
- 	no-> dir = *raiz;
- 	(*raiz)-> altura = maior (altura_tNo((*raiz)-> esq), altura_tNo((*raiz)-> dir)) + 1;
-
- 	no-> altura = maior(altura_tNo (no-> esq), (*raiz)-> altura)+1;
-
- 	(*raiz) = no;
-}
 
 
-
-void rotacaoDD(tNo *raiz){
- struct tNo *no;
-
- 	no = (*raiz)-> dir;
- 	no-> dir = no-> esq;
- 	no-> esq = (*raiz);
- 	(*raiz)-> altura = maior (altura_tNo((*raiz)-> esq), altura_tNo((*raiz)-> dir)) + 1;
-
- 	no-> altura = maior(altura_tNo(no-> dir), (*raiz)-> altura)+ 1;
-
- 	(*raiz) = no;
-}
-
+ }
+*/
 
 tNo *busca (tNo *no, int c){
 	if (no == NULL)
@@ -73,13 +163,19 @@ tNo *busca (tNo *no, int c){
 		return (busca(no->dir, c));
 }
 
-void imprime_tree(tNo *raiz){
-	if (raiz == NULL)
-		printf("()");
-	else
-												/*Definir uma impressão por nodo, criando uma nova função que imprime nodo por nodo da árvore, criando uma pilha para abertura de cada
-													parênteses e seu fechamento, assim controlamos para que não falte nenhum parenteses, para as vírgulas precisamos definir um padrão
-													para que elas também fiquem corretas.*/
+void imprime_tree(tNo *no){
 
+	if (no == NULL){
+		printf("()");
+	}
+	else{
+		printf("%d,(",no->chave);
+		imprime_tree(no->esq);
+		printf("),(");
+		imprime_tree(no->dir);
+		printf(")");
+	}
 }
+
+
 
