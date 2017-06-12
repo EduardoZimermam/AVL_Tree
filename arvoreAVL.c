@@ -76,9 +76,10 @@ tNo *rotacaoDirDir(tNo *raiz){           /*Rotação Simples à Direita - quanto
 }
 
 
-tNo *insere(tNo *no,int valor){
+tNo *insere(int valor){
 
 	int b;
+	tNo *no = NULL;
 
 	if(no == NULL){
 		return (cria_no(valor));
@@ -123,7 +124,7 @@ tNo *insere(tNo *no,int valor){
         return rotacaoEsqEsq(no);
     }
  
-   return (no);
+ 	return(no);
 }
 
 

@@ -16,7 +16,7 @@ int balanceamento(tNo *no);
 int maior(int x, int y);
 tNo *rotacaoEsqEsq (tNo *raiz);
 tNo *rotacaoDirDir(tNo *raiz);
-tNo *insere(tNo *no,int valor);
+tNo *insere(int valor);
 tNo *busca (tNo*, int c);
 void imprime_tree(tNo *no);			
 

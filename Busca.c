@@ -18,11 +18,11 @@ int main(int argc, char **argv){
     	arq = stdin; 											
    	}
 
-	fscanf(arq,"%s %d",&ch,&valor); 
+	fscanf(arq,"%c %d",&ch,&valor); 
 	while(!feof (arq)){
 		switch(ch){
 			case 'i':                     
-				insere(no,valor);
+				no = insere(valor);
 				printf("i %d\n(",valor);
 				imprime_tree(no);
 				printf(")\n\n");
@@ -40,6 +40,7 @@ int main(int argc, char **argv){
 				printf(")\n\n");
 			break;
 		}
+		fscanf(arq,"%c %d",&ch,&valor); 
 	}
  fclose(arq);
  return(0);
