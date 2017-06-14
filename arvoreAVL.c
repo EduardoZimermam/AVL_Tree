@@ -6,9 +6,9 @@ tNo *cria_no (int valor){
  tNo *no;
 	no = (tNo*) malloc (sizeof(tNo));			/*Definição de uma função para criar o nodo da árvore*/
 	no->chave = valor;
-	no->altura = 1;
 	no->esq = NULL;
 	no->dir = NULL;
+	no->altura = 1;
 
  return(no);	
 }
@@ -30,7 +30,7 @@ int balanceamento(tNo *no){                           /*Diferença nas alturas d
  		total = 0;
  	}
  	else{
- 		total= labs(altura_no (no->esq) - altura_no (no->dir));          /*Função labs retorna o valor real,podendo ser um valor negativo*/
+ 		total = altura_no(no->esq) - altura_no(no->dir);          /*Função labs retorna o valor real,podendo ser um valor negativo*/
  	}
 	
  return(total);
@@ -80,7 +80,6 @@ tNo *insere(tNo *no, int valor){
 
 	int b;
 
-		printf("Passou!\n");
 	if(!no){
 		return (cria_no(valor));
 	}
