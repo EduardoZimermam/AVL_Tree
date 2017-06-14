@@ -76,26 +76,25 @@ tNo *rotacaoDirDir(tNo *raiz){           /*Rotação Simples à Direita - quanto
 }
 
 
-tNo *insere(int valor){
+tNo *insere(tNo *no, int valor){
 
 	int b;
-	tNo *no = NULL;
 
 	if(no == NULL){
 		return (cria_no(valor));
 	}
 
 	if(valor < no->chave){
-		no->esq = insere(no->esq,valor);
+		no->esq = insere(no->esq, valor);
 	}
 	else if (valor > no->chave){
-		no->dir = insere(no->dir,valor);
+		no->dir = insere(no->dir, valor);
 	}
 	else{
 		return(no);
 	}
 
-	no->altura = 1+ maior(altura_no(no->esq),altura_no(no->dir));  /*atualiza a altura do nodo*/
+	no->altura = 1 + maior(altura_no(no->esq),altura_no(no->dir));  /*atualiza a altura do nodo*/
 
 	b = balanceamento(no);     /*verifica se esta balanceado ou nao*/
 
@@ -150,8 +149,8 @@ tNo *insere(int valor){
 
 
 
- }
-*/
+ }*/
+
 
 tNo *busca (tNo *no, int c){
 	if (no == NULL)
@@ -166,10 +165,7 @@ tNo *busca (tNo *no, int c){
 
 void imprime_tree(tNo *no){
 
-	if (no == NULL){
-		printf("()");
-	}
-	else{
+	if(no != NULL){
 		printf("%d,(",no->chave);
 		imprime_tree(no->esq);
 		printf("),(");

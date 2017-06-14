@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include "arvoreAVL.h"
 
-
-
-
 int main(int argc, char **argv){ 
  FILE *arq;
  tNo *no = NULL;
@@ -22,7 +19,7 @@ int main(int argc, char **argv){
 	while(!feof (arq)){
 		switch(ch){
 			case 'i':                     
-				no = insere(valor);
+				no = insere(no, valor);
 				printf("i %d\n(",valor);
 				imprime_tree(no);
 				printf(")\n\n");
