@@ -31,7 +31,7 @@ int main(int argc, char **argv){
 			break;
 
 			case 'r':					 
-				no = remove(no,valor);
+				no = remocao(no,valor);
 				printf("r %d\n(",valor);
 				imprime_tree(no);
 				printf(")\n\n");
