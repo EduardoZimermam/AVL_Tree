@@ -18,9 +18,9 @@ int main(int argc, char **argv){
 	fscanf(arq,"%c %d",&ch,&valor); 
 	while(!feof (arq)){
 		switch(ch){
-			case 'i':                     
+			case 'i':                  
+				printf("i %d\n(",valor);   
 				no = insere(no, valor);
-				printf("i %d\n(",valor);
 				imprime_tree(no);
 				printf(")\n\n");
 			break;
@@ -40,5 +40,6 @@ int main(int argc, char **argv){
 		fscanf(arq,"%c %d",&ch,&valor); 
 	}
  fclose(arq);
+
  return(0);
 }

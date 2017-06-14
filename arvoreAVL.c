@@ -80,7 +80,8 @@ tNo *insere(tNo *no, int valor){
 
 	int b;
 
-	if(no == NULL){
+		printf("Passou!\n");
+	if(!no){
 		return (cria_no(valor));
 	}
 
@@ -97,7 +98,6 @@ tNo *insere(tNo *no, int valor){
 	no->altura = 1 + maior(altura_no(no->esq),altura_no(no->dir));  /*atualiza a altura do nodo*/
 
 	b = balanceamento(no);     /*verifica se esta balanceado ou nao*/
-
 
 	/*Se o nó ficar desbalanceado,existem 4 casos*/
 
@@ -122,7 +122,7 @@ tNo *insere(tNo *no, int valor){
         no->dir = rotacaoDirDir(no->dir);
         return rotacaoEsqEsq(no);
     }
- 
+
  	return(no);
 }
 
