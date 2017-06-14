@@ -35,7 +35,7 @@ int balanceamento(tNo *no){                           /*Diferença nas alturas d
  		total = 0;
  	}
  	else{
- 		total = altura_no(no->esq) - altura_no(no->dir);          /*Função labs retorna o valor real,podendo ser um valor negativo*/
+ 		total = altura_no(no->esq) - altura_no(no->dir);         
  	}
 	
  return(total);
@@ -160,7 +160,7 @@ tNo *remocao(tNo *no, int valor){
 
 		if ((no->esq == NULL) || (no->dir == NULL)){
 			
-			if(aux = no->esq){                         //aux = no -> esq ? no -> esq : no -> dir;
+			if((aux = no->esq)){                         //aux = no -> esq ? no -> esq : no -> dir;
 				return(no->esq);
 			}
 			else{
@@ -228,10 +228,14 @@ tNo *busca (tNo *no, int c){
 		return NULL;
 	if(c == no->chave)
 	  return (no);								/*Definição de uma função para buscar um determinado nodo na árvore. O seu retorno depende se o nodo foi encontrado ou não*/
-	if (c < no->chave)
-		return (busca(no->esq, c));
-	else
+	if (c < no->chave){
+		printf("%d,",no->chave);
+		return (busca(no->esq, c));		
+	}
+	else{
+		printf("%d\n\n", no->chave);
 		return (busca(no->dir, c));
+	}
 }
 
 void imprime_tree(tNo *no){

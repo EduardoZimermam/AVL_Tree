@@ -20,8 +20,8 @@ int main(int argc, char **argv){
     	arq = stdin; 											
    	}
 
-//	fscanf(arq,"%c %d",&ch,&valor); 
-	while(fscanf(arq,"%c %d",&ch,&valor) != EOF){
+	fscanf(arq,"%c %d",&ch,&valor); 
+	while(!feof (arq)){
 		switch(ch){
 			case 'i':                  
 				printf("i %d\n(",valor);   
@@ -42,7 +42,7 @@ int main(int argc, char **argv){
 				printf(")\n\n");
 			break;
 		}
-//		fscanf(arq,"%c %d",&ch,&valor); 
+		fscanf(arq,"%c %d",&ch,&valor); 
 	}
  fclose(arq);
 
