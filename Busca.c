@@ -1,3 +1,8 @@
+/*Autores:
+Annelyse Schatzmann           GRR20151731
+Eduardo Zimermam Pereira      GRR20152952  */
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "arvoreAVL.h"

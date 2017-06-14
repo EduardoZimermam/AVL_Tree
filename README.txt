@@ -1,3 +1,8 @@
+/*Autores:
+Annelyse Schatzmann           GRR20151731
+Eduardo Zimermam Pereira      GRR20152952  */
+
+
 FATOR DE BALANCEAMENTO
 
 Se o valor do balanceamento for maior que 1, o nó atual esta desbalanceado = caso Esquerda Esquerda ou Caso Esquerda Direita. 

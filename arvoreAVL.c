@@ -1,3 +1,8 @@
+/*Autores:
+Annelyse Schatzmann           GRR20151731
+Eduardo Zimermam Pereira      GRR20152952  */
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "arvoreAVL.h"
@@ -44,6 +49,17 @@ int maior(int x, int y){             /*Função que determina o maior*/
 	else{
 		return (y);
 	}
+}
+
+tNo *minValor (tNo *no){    				/*Devolve o nó com o menor valor encontrado nessa árvore.*/
+
+ tNo *atual = no;
+
+ 	while(atual->esq != NULL){
+ 		atual= atual-> esq;
+ 	}
+
+ return(atual);
 }
 
 
@@ -125,30 +141,86 @@ tNo *insere(tNo *no, int valor){
  	return(no);
 }
 
+tNo *remocao(tNo *no, int valor){
+ int b;
+ tNo *aux = NULL;
 
-
-/*int remove(){
- 
-	if((*raiz)== NULL){
-		printf("Valor não existe!\n");
-		return(0);
+	if(no == NULL){
+		return(no);
 	}
-	if(valor <(*raiz)->chave){
-		if( = remove(&(*raiz)->esq,valor)){
-			if(balanceamento(*raiz)>=2){
-				if(altura_no((*raiz)->dir->esq) <= altura_no((*raiz)->dir->dir)){
-					rotacaoDirDir(raiz);
-				}
-				else{
-					rotacaoDirEsq(raiz);
-				}
+
+	if( valor < no->chave){									//Se a chave a ser excluída for menor que a chave da raiz, então ela fica na subárvore da esquerda
+		no->esq = remocao(no->esq,valor);
+	}
+	else if(valor > no->chave){								//Se a chave a ser excluída for maior que a chave da raiz, então ela fica na subárvore da direita
+		no->dir = remocao(no->dir,valor);
+	}
+
+	else{												//nó com uma ou nenhuma criança
+
+		if ((no->esq == NULL) || (no->dir == NULL)){
+			
+			if(aux = no->esq){                         //aux = no -> esq ? no -> esq : no -> dir;
+				return(no->esq);
 			}
+			else{
+				return(no->dir);
+			}
+
+			if (aux == NULL){				//sem filhos
+				aux= no;
+				no = NULL;
+			}
+			else{							//copia conteudo do filho
+				(*no) = (*aux);
+				free (aux);
+			}
+		}
+
+		else{										//nós com dois filhos- obtem o sucessor
+
+			aux = minValor (no->dir);
+			no->chave = aux->chave;								//copia dados do sucessor
+			no->dir = remocao(no->dir,aux->chave);				//exclui o sucessor
 		}
 	}
 
+	if(no == NULL){											//se tiver apenas um no
+		return(no);
+	}
+
+	no->altura = 1+ maior(altura_no(no->esq),altura_no(no->dir));  /*atualiza a altura do nodo*/
+
+	b = balanceamento(no);     /*verifica se esta balanceado ou nao*/
 
 
- }*/
+		/*Se o nó ficar desbalanceado,existem 4 casos*/
+
+		//Caso Esqueda Esquerda
+		if (b > 1 && balanceamento(no->esq) >= 0){
+			return rotacaoDirDir(no);
+		}
+
+		//Caso Direita Direita
+		if (b < -1 && balanceamento(no->dir) <= 0){
+        	return rotacaoEsqEsq(no);
+		}
+ 
+    	//Caso Esquerda Direita
+    	if (b > 1 && balanceamento(no->esq) < 0){
+       	 	no->esq =  rotacaoEsqEsq(no->esq);
+        	return rotacaoDirDir(no);
+    	}
+ 
+    	//Caso Direita Esquerda
+   		if (b < -1 && balanceamento(no->dir) > 0){
+      		no->dir = rotacaoDirDir(no->dir);
+       	 	return rotacaoEsqEsq(no);
+    	}
+ 
+  return (no);
+}
+
 
 
 tNo *busca (tNo *no, int c){
@@ -172,6 +244,3 @@ void imprime_tree(tNo *no){
 		printf(")");
 	}
 }
-
-
-
