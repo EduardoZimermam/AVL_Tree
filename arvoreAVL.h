@@ -14,10 +14,12 @@ tNo *cria_no (int valor);
 int altura_no(tNo *no);
 int balanceamento(tNo *no);
 int maior(int x, int y);
+tNo *minValor (tNo *no);
 tNo *rotacaoEsqEsq (tNo *raiz);
 tNo *rotacaoDirDir(tNo *raiz);
 tNo *insere(tNo *no, int valor);
-tNo *busca (tNo*, int c);
+tNo *remocao(tNo *no, int valor);
+tNo *busca (tNo*, int valor);
 void imprime_tree(tNo *no);			
 
 #endif
