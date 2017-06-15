@@ -24,7 +24,7 @@ tNo *rotacaoEsqEsq (tNo *raiz);
 tNo *rotacaoDirDir(tNo *raiz);
 tNo *insere(tNo *no, int valor);
 tNo *remocao(tNo *no, int valor);
-tNo *busca (tNo*, int valor);
+tNo *busca (tNo*, int valor, int flag);
 void imprime_tree(tNo *no);			
 
 #endif

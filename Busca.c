@@ -32,7 +32,7 @@ int main(int argc, char **argv){
 
 			case 'b':					    
 				printf("b %d\n",valor);
-				busca(no,valor);
+				busca(no,valor, 0);
 				printf("\n\n");
 			break;
 

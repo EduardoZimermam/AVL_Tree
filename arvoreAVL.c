@@ -229,17 +229,20 @@ tNo *remocao(tNo *no, int valor){
 
 
 
-tNo *busca (tNo *no, int c){
+tNo *busca (tNo *no, int c, int flag){
 	if (no == NULL)
 		return NULL;
 	if(c == no->chave)
 	  return (no);								/*Definição de uma função para buscar um determinado nodo na árvore. O seu retorno depende se o nodo foi encontrado ou não*/
 	if (c < no->chave){
-		return (busca(no->esq, c));		
+		return (busca(no->esq, c, 1));		
 	}
 	else{
-		printf("%d,", no->chave);
-		return (busca(no->dir, c));
+		if (flag == 0)
+			printf("%d", no->chave);
+		else
+			printf(",%d", no->chave);
+		return (busca(no->dir, c, 1));
 	}
 }
 
