@@ -66,13 +66,16 @@ tNo *minValor (tNo *no){    				/*Devolve o nó com o menor valor encontrado nes
 /*As rotações são aplicadas no ancestral do nó inserido cujo o valor de balanceamento passa a ser +2 ou -2*/
 tNo *rotacaoEsqEsq (tNo *raiz){            /*Rotação Simples à Esquerda - quanto há dois nós para a direita*/
  tNo *no;
+ tNo *aux;
 
- 	no = raiz-> dir;
- 	no->esq = raiz;							  
- 	raiz-> dir = no-> esq;					//filho direito passa a ser filho esquerdo da raiz
+    no = raiz-> dir;
+    aux = no-> esq;
 
- 	raiz->altura = maior (altura_no(raiz-> esq), altura_no(raiz-> dir)) + 1;
-	no->altura = maior (altura_no(no-> esq),altura_no (no->dir))+1;
+    no->esq = raiz;                           
+    raiz-> dir = aux;                  //filho direito passa a ser filho esquerdo da raiz
+
+    raiz->altura = maior (altura_no(raiz-> esq), altura_no(raiz-> dir)) + 1;
+    no->altura = maior (altura_no(no-> esq),altura_no (no->dir))+1;
 
  return(no);
 }
@@ -80,10 +83,13 @@ tNo *rotacaoEsqEsq (tNo *raiz){            /*Rotação Simples à Esquerda - qua
 
 tNo *rotacaoDirDir(tNo *raiz){           /*Rotação Simples à Direita - quanto há dois nós para a esquerda*/
  tNo *no;
+ tNo *aux;
 
  	no = raiz->esq;
+ 	aux = no->dir;
+
     no->dir = raiz;
-	raiz->esq = no->dir;
+	raiz->esq = aux;
 
  	raiz->altura = maior (altura_no(raiz->esq), altura_no(raiz->dir)) + 1;
 	no->altura = maior(altura_no(no-> esq), altura_no (no->dir))+ 1;
